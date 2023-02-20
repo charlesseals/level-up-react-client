@@ -24,7 +24,7 @@ export const EventList = (props) => {
                     return <section key={`event--${event.id}`} className="event">
                         <div className="event__name">{event.con_name} organized by {event.organizer.full_name}</div>
                         <div className="event__location">Event Location: {event.location} </div>
-                        <div className="event__time">Date and Time: {event.time} </div>
+                        <div className="event__time">Date and Time: {event.time.replace('T', ' ').replace(':00Z', '')} </div>                   
                     </section>
                 })
             }

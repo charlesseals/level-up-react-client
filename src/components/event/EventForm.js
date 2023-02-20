@@ -21,17 +21,17 @@ export const EventForm = () => {
         the properties of this state variable, you need to
         provide some default values.
     */
-
+    
     // events.map(event => {
     //     let currentOrganizer = event.full_name
     // })
 
     const [currentEvent, setCurrentEvent] = useState({
-        organizer: 0,
+        conName: "",
         location: "",
+        organizer: 0,
         time: "",
         game: 0,
-        conName: "",
     })
 
     useEffect(() => {
@@ -117,9 +117,9 @@ return (
                     const event = {
                         organizer: currentEvent.organizer,
                         location: currentEvent.location,
-                        time: parseInt(currentEvent.time),
+                        time: currentEvent.time,
                         game: currentEvent.game,
-                        con_name: parseInt(currentEvent.conName),
+                        con_name: currentEvent.conName,
                     }
 
                     // Send POST request to your API
