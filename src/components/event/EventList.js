@@ -1,14 +1,40 @@
 import { Link, useNavigate } from "react-router-dom"
 import React, { useEffect, useState } from "react"
-import { getEvents, DeleteEvent } from "../../managers/EventManager.js"
+import { getEvents, DeleteEvent, leaveEvent, joinEvent } from "../../managers/EventManager.js"
 
 export const EventList = (props) => {
     const navigate = useNavigate()
     const [ events, setEvents ] = useState([])
+    const [refresh, setRefresh] = useState(true)
 
     useEffect(() => {
         getEvents().then(data => setEvents(data))
-    }, [])
+    }, [refresh])
+
+
+    // const handleLeaveButton = (eventId) => {
+    //     leaveEvent(eventId)
+    //     .then(getEvents()).then(res => setEvents(res))
+    // }
+    
+    
+    // const handleSignUpButton = (eventId) => {
+    //     joinEvent(eventId)
+    //     getEvents().then(res => setEvents(res))
+    // }
+    const handleLeaveButton = (id) => {
+        leaveEvent(id)
+        // .then(() => {getEvents()})
+        .then((res) => {setRefresh()})
+        window.location.reload(true);
+    }
+
+    const handleSignUpButton = (id) => {
+        joinEvent(id)
+        // .then(() => {getEvents()})
+        .then((res) => {setRefresh()})
+        window.location.reload(true);
+    }
 
 
     return (
@@ -46,6 +72,23 @@ export const EventList = (props) => {
                             >
                             Delete Button
                         </button>
+                        {
+                            event.joined ?
+                            // TODO: create the Leave button
+                            <button onClick={() => {
+                                handleLeaveButton(event.id)
+                                // setRefresh()
+                            }}>Leave Event</button>
+                            :
+                            // TODO: create the Join button
+                            <button onClick={() => {
+                                handleSignUpButton(event.id)
+                                // setRefresh()
+                            }}>Join Event</button>
+
+                        }
+                                                
+
                     </section>
                 })
             }
