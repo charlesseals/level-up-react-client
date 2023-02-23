@@ -9,7 +9,7 @@ export const EventList = (props) => {
 
     useEffect(() => {
         getEvents().then(data => setEvents(data))
-    }, [refresh])
+    }, [])
 
 
     // const handleLeaveButton = (eventId) => {
@@ -24,16 +24,14 @@ export const EventList = (props) => {
     // }
     const handleLeaveButton = (id) => {
         leaveEvent(id)
-        // .then(() => {getEvents()})
-        .then((res) => {setRefresh()})
-        window.location.reload(true);
+        .then(() => {return getEvents()})
+        .then((res) => {setEvents(res)})
     }
 
     const handleSignUpButton = (id) => {
         joinEvent(id)
-        // .then(() => {getEvents()})
-        .then((res) => {setRefresh()})
-        window.location.reload(true);
+        .then(() => {return getEvents()})
+        .then((res) => {setEvents(res)})
     }
 
 
